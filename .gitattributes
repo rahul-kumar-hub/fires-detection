@@ -1,1 +1,4 @@
 models/model1/model_package.joblib filter=lfs diff=lfs merge=lfs -text
+models/model2/*.joblib filter=lfs diff=lfs merge=lfs -text
+data/*.csv filter=lfs diff=lfs merge=lfs -text
+data/*.xlsx filter=lfs diff=lfs merge=lfs -text
