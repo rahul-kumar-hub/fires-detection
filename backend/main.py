@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from getpass import getpass
 
+from backend.inference.model2 import run_model2
 from backend.services.firms import (
     build_firms_features,
     find_live_hotspot,
@@ -35,8 +36,10 @@ from backend.inference.model1 import (
 
 def main():
 
+    selected_model = os.environ.get("FIRE_MODEL", "1")
+
     print("\n" + "=" * 70)
-    print("FIRE DETECTION SYSTEM — MODEL 1")
+    print(f"FIRE DETECTION SYSTEM — MODEL {selected_model}")
     print("=" * 70)
 
     # --------------------------------------------------------
@@ -76,6 +79,16 @@ def main():
         raise ValueError(
             "Longitude must be between -180 and 180."
         )
+
+    if os.environ.get("FIRE_MODEL", "1") == "2":
+        result = run_model2(
+            latitude=latitude,
+            longitude=longitude,
+        )
+        print("\nModel 2 result:")
+        for key, value in result.items():
+            print(f"{key}: {value}")
+        return result
 
     print("\nQuery location")
     print(

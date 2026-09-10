@@ -2930,7 +2930,7 @@ OSM_QUERY = f"""
   nwr(around:{OSM_RADIUS_M},{lat},{lon})["landuse"="forest"];
 );
 
-out body center;
+out tags center qt;
 """
 
 
@@ -3888,6 +3888,7 @@ print("=" * 70)
 
 
 dw_rows = []
+dw_cache = {}
 
 
 try:
@@ -4007,31 +4008,6 @@ try:
 
 
         # ----------------------------------------------------
-        # Number of images
-        # ----------------------------------------------------
-
-        count = int(
-            collection
-            .size()
-            .getInfo()
-        )
-
-
-        print(
-            "DW images in search window:",
-            count
-        )
-
-
-        if count == 0:
-
-            return {
-                "status":
-                    "NO_IMAGE"
-            }
-
-
-        # ----------------------------------------------------
         # OPTIMIZATION:
         #
         # Fetch ALL system:time_start values in ONE request.
@@ -4052,6 +4028,8 @@ try:
                 "status":
                     "NO_IMAGE"
             }
+
+        count = len(timestamps)
 
 
         timestamp_array = np.asarray(
@@ -4431,12 +4409,21 @@ try:
 
         try:
 
-            result = get_dw_for_point(
-                row["latitude"],
-                row["longitude"],
-                row["acq_date"]
+            cache_key = (
+                round(float(row["latitude"]), 6),
+                round(float(row["longitude"]), 6),
+                str(pd.Timestamp(row["acq_date"]).date()),
             )
 
+            if cache_key in dw_cache:
+                result = dict(dw_cache[cache_key])
+            else:
+                result = get_dw_for_point(
+                    row["latitude"],
+                    row["longitude"],
+                    row["acq_date"]
+                )
+                dw_cache[cache_key] = dict(result)
 
             result[
                 "event_index"
