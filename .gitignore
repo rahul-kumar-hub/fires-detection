@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Secrets / environment variables
+.env
+.env.*
+
+# Google Earth Engine credentials
+.credentials/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Runtime/cache
+backend/cache/
+data/cache/
+data/evidence/
