@@ -8,6 +8,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = PROJECT_ROOT / "models" / "model1" / "model_package.joblib"
+MODEL2_DIR = PROJECT_ROOT / "models" / "model2"
 
 
 # ============================================================

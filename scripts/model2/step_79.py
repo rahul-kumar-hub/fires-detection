@@ -193,7 +193,7 @@ OVERPASS_SERVERS = [
 # DYNAMIC WORLD
 # ------------------------------------------------------------
 
-EE_PROJECT = "possible-haven-507714-f0"
+EE_PROJECT = "planar-depth-508020-q9"
 
 DW_AREA_M = 300
 
