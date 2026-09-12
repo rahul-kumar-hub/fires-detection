@@ -300,7 +300,8 @@
   padding: 0 24px;
   border: 0;
   border-radius: 999px;
-  background: #ff6045;
+  background: #ff5b37;
+
   color: #ffffff;
   font: inherit;
   font-size: 14px;
@@ -1269,7 +1270,7 @@
   border: 0;
   border-radius: 10px;
   color: #ffffff;
-  background: #e67817;
+  background: #ff5b37;
   box-shadow: 0 6px 14px rgba(214, 105, 16, 0.18);
   cursor: pointer;
   font: inherit;
@@ -1286,7 +1287,7 @@
 }
 
 .ai-run-button:hover {
-  background: #cf6410;
+  background: #f04c1a;
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(214, 105, 16, 0.24);
 }
