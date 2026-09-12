@@ -206,6 +206,10 @@
   gap: 24px;
 }
 
+.ai-prediction-page h2{
+  color: black;
+}
+
 /* =========================================
    LOCATION INPUT
 ========================================= */
@@ -610,7 +614,7 @@
 /* =========================================================
    AI PREDICTION PAGE
    ========================================================= */
-
+/*
 .ai-prediction-page {
   display: flex;
   flex-direction: column;
@@ -654,7 +658,7 @@
 .ai-command-header h2,
 .ai-results-heading h2 {
   margin: 0;
-  color: #f8fafc;
+  color: #070707;
   font-size: clamp(1.35rem, 2vw, 1.8rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -663,7 +667,7 @@
 .ai-command-header p {
   max-width: 600px;
   margin: 10px 0 0;
-  color: #94a3b8;
+  color: #0a0a0a;
   font-size: 0.92rem;
   line-height: 1.7;
 }
@@ -1026,6 +1030,12 @@
   white-space: nowrap;
 }
 
+.ai-prediction-h2-engine{
+  color: rgb(14, 13, 13);
+  z-index: 11111;
+  /* background-color: red; */
+
+/* 
 @media (max-width: 760px) {
   .ai-command-card,
   .ai-model-card,
@@ -1060,5 +1070,544 @@
 
   .ai-final-badge {
     margin-left: 0;
+  }
+} */
+
+
+
+
+/* =========================================================
+   AI PREDICTION PAGE
+   Light theme — orange accent
+   ========================================================= */
+
+.ai-prediction-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* =========================================================
+   COMMAND / INPUT CARD
+   ========================================================= */
+
+.ai-command-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid #e7e2dc;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(28, 25, 23, 0.05);
+}
+
+.ai-command-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.ai-card-kicker {
+  display: inline-block;
+  margin-bottom: 9px;
+  color: #d97706;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ai-command-header h2,
+.ai-results-heading h2 {
+  margin: 0;
+  color: #171412;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.ai-command-header p {
+  max-width: 600px;
+  margin: 10px 0 0;
+  color: #6b625b;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.ai-command-icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid #f0c892;
+  border-radius: 14px;
+  color: #c26105;
+  background: #fff7ed;
+  font-size: 1.8rem;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.ai-prediction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.ai-location-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ai-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.ai-field > span {
+  color: #292522;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ai-field input {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border: 1px solid #dcd5ce;
+  border-radius: 10px;
+  outline: none;
+  color: #211e1b;
+  background: #ffffff;
+  font: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.ai-field input:hover {
+  border-color: #c9bfb6;
+}
+
+.ai-field input::placeholder {
+  color: #a29a93;
+}
+
+.ai-field input:focus {
+  border-color: #e58a24;
+  background: #fffdfa;
+  box-shadow: 0 0 0 3px rgba(229, 138, 36, 0.12);
+}
+
+.ai-field small {
+  color: #8a8179;
+  font-size: 0.75rem;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.ai-error-message {
+  padding: 13px 15px;
+  border: 1px solid #f0b7b0;
+  border-radius: 10px;
+  color: #a43d32;
+  background: #fff5f3;
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   FORM FOOTER
+   ========================================================= */
+
+.ai-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 5px;
+}
+
+.ai-form-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #756d66;
+  font-size: 0.8rem;
+}
+
+.ai-form-status span,
+.ai-model-badge span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4f9d69;
+}
+
+/* =========================================================
+   RUN BUTTON
+   ========================================================= */
+
+.ai-run-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 48px;
+  padding: 0 21px;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  background: #e67817;
+  box-shadow: 0 6px 14px rgba(214, 105, 16, 0.18);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ai-run-button span {
+  font-size: 1.1rem;
+}
+
+.ai-run-button:hover {
+  background: #cf6410;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(214, 105, 16, 0.24);
+}
+
+.ai-run-button:active {
+  transform: translateY(0);
+}
+
+.ai-run-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+}
+
+/* =========================================================
+   RESULTS SECTION
+   ========================================================= */
+
+.ai-results-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ai-results-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.ai-coordinate-pill {
+  padding: 8px 12px;
+  border: 1px solid #ded8d2;
+  border-radius: 8px;
+  color: #625a53;
+  background: #faf8f6;
+  font-family: monospace;
+  font-size: 0.76rem;
+}
+
+/* =========================================================
+   MODEL CARDS
+   ========================================================= */
+
+.ai-model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ai-model-card {
+  position: relative;
+  overflow: hidden;
+  padding: 25px;
+  border: 1px solid #e5dfd9;
+  border-top: 3px solid #e67817;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.045);
+}
+
+.ai-model-card.blue {
+  border-top-color: #4f6f8f;
+}
+
+.ai-model-card.orange {
+  border-top-color: #e67817;
+}
+
+.ai-model-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.ai-model-card h3 {
+  margin: 0;
+  color: #1c1917;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* =========================================================
+   ONLINE BADGE
+   ========================================================= */
+
+.ai-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border: 1px solid #cfe4d5;
+  border-radius: 999px;
+  color: #39734b;
+  background: #f3faf5;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   PREDICTION
+   ========================================================= */
+
+.ai-prediction-label {
+  margin-top: 30px;
+  color: #817970;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ai-prediction-value {
+  margin-top: 8px;
+  color: #171412;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   CONFIDENCE
+   ========================================================= */
+
+.ai-confidence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+  color: #756d66;
+  font-size: 0.8rem;
+}
+
+.ai-confidence-header strong {
+  color: #28231f;
+  font-size: 0.9rem;
+}
+
+.ai-confidence-track {
+  width: 100%;
+  height: 7px;
+  margin-top: 11px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ebe7e3;
+}
+
+.ai-confidence-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #4f6f8f;
+  transition: width 0.6s ease;
+}
+
+.ai-model-card.orange .ai-confidence-fill {
+  background: #e67817;
+}
+
+/* =========================================================
+   CLASS PROBABILITIES
+   ========================================================= */
+
+.ai-probability-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ebe6e1;
+}
+
+.ai-probability-heading,
+.ai-probability-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.ai-probability-heading {
+  color: #817970;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.ai-probability-row {
+  color: #554e48;
+  font-size: 0.8rem;
+}
+
+.ai-probability-row strong {
+  color: #24201d;
+  font-family: monospace;
+  font-size: 0.78rem;
+}
+
+/* =========================================================
+   FINAL DECISION
+   ========================================================= */
+
+.ai-final-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 25px;
+  border: 1px solid #ead8c4;
+  background: #fffaf5;
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.04);
+}
+
+.ai-final-icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid #f0c28e;
+  border-radius: 12px;
+  color: #c7650c;
+  background: #fff1df;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.ai-final-card h2 {
+  margin: 0;
+  color: #1c1917;
+  font-size: 1.45rem;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.ai-final-card p {
+  margin: 7px 0 0;
+  color: #6d645c;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.ai-final-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 13px;
+  color: #756d66;
+  font-size: 0.78rem;
+}
+
+.ai-final-details strong {
+  color: #28231f;
+}
+
+.ai-final-badge {
+  margin-left: auto;
+  padding: 7px 10px;
+  border: 1px solid #e9c79e;
+  border-radius: 999px;
+  color: #b55b08;
+  background: #fff5e8;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ENGINE TITLE
+   ========================================================= */
+
+.ai-prediction-h2-engine {
+  color: #171412;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .ai-command-card,
+  .ai-model-card,
+  .ai-final-card {
+    padding: 20px;
+  }
+
+  .ai-command-header,
+  .ai-results-heading,
+  .ai-form-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-command-icon {
+    display: none;
+  }
+
+  .ai-location-grid,
+  .ai-model-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-run-button {
+    width: 100%;
+  }
+
+  .ai-final-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .ai-final-badge {
+    margin-left: 0;
+  }
+
+  .ai-final-details {
+    flex-direction: column;
+    gap: 7px;
   }
 }
