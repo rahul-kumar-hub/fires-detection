@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import os
 import subprocess
 import sys
 
@@ -14,7 +15,10 @@ import pandas as pd
 # DYNAMIC WORLD CONSTANTS
 # ============================================================
 
-EE_PROJECT = "planar-depth-508020-q9"
+EE_PROJECT = (
+    os.getenv("EE_PROJECT")
+    or os.getenv("GOOGLE_CLOUD_PROJECT")
+)
 
 DW_COLLECTION = "GOOGLE/DYNAMICWORLD/V1"
 
@@ -84,23 +88,26 @@ def ensure_earth_engine():
 
 def initialize_earth_engine():
     """
-    Initialize Google Earth Engine using the same project
-    as Cell 2B.
+    Initialize Google Earth Engine using the configured Cloud project.
     """
 
     ee = ensure_earth_engine()
 
     try:
 
-        ee.Initialize(
-            project=EE_PROJECT
-        )
+        if EE_PROJECT:
+            ee.Initialize(project=EE_PROJECT)
+        else:
+            ee.Initialize()
 
     except Exception as exc:
 
         raise RuntimeError(
             "\nEarth Engine initialization failed.\n\n"
             + str(exc)
+            + "\n\nSet EE_PROJECT (or GOOGLE_CLOUD_PROJECT) to a Google Cloud "
+            "project where Earth Engine is enabled and the authenticated "
+            "caller has serviceusage.services.use permission."
         ) from exc
 
     return ee
