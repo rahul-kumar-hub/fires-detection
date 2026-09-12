@@ -1,8 +1,11 @@
 import { FormEvent, useState } from "react";
 import Page from "../components/common/Page";
 import GlassCard from "../components/common/GlassCard";
-import { comparePredictions } from "../services/api";
-import "../style.css"
+import {
+  predictModel1,
+  predictModel2,
+} from "../services/api";
+import "../style.css";
 
 type ModelResult = {
   predicted_class: string;
@@ -18,9 +21,9 @@ type FinalPrediction = {
 };
 
 type ComparisonResult = {
-  model1: ModelResult;
-  model2: ModelResult;
-  final_prediction: FinalPrediction;
+  model1?: ModelResult;
+  model2?: ModelResult;
+  final_prediction?: FinalPrediction;
 };
 
 function formatConfidence(value: number) {
@@ -136,10 +139,25 @@ export default function AIPrediction() {
     try {
       setLoading(true);
 
-      // Your API expects two separate arguments.
-      const response = await comparePredictions(lat, lon);
+      const model1 = await predictModel1(lat, lon);
+      setResult({ model1 });
 
-      setResult(response);
+      const model2 = await predictModel2(lat, lon);
+      const finalModel =
+        model1.confidence >= model2.confidence ? model1 : model2;
+      const selectedModel =
+        model1.confidence >= model2.confidence ? "model1" : "model2";
+
+      setResult({
+        model1,
+        model2,
+        final_prediction: {
+          predicted_class: finalModel.predicted_class,
+          confidence: finalModel.confidence,
+          selected_model: selectedModel,
+          reason: `${selectedModel.toUpperCase()} produced the highest confidence.`,
+        },
+      });
     } catch (requestError) {
       console.error(requestError);
 
@@ -252,50 +270,52 @@ export default function AIPrediction() {
             </div>
 
             <div className="ai-model-grid">
-              <ModelResultCard
-                title="Model 1"
-                model={result.model1}
-                accent="blue"
-              />
+              {result.model1 && (
+                <ModelResultCard
+                  title="Model 1"
+                  model={result.model1}
+                  accent="blue"
+                />
+              )}
 
-              <ModelResultCard
-                title="Model 2"
-                model={result.model2}
-                accent="orange"
-              />
+              {result.model2 && (
+                <ModelResultCard
+                  title="Model 2"
+                  model={result.model2}
+                  accent="orange"
+                />
+              )}
             </div>
 
-            <GlassCard className="ai-final-card">
-              <div className="ai-final-icon">✓</div>
+            {result.final_prediction && (
+              <GlassCard className="ai-final-card">
+                <div className="ai-final-icon">✓</div>
 
-              <div>
-                <span className="ai-card-kicker">FINAL DECISION</span>
+                <div>
+                  <span className="ai-card-kicker">FINAL DECISION</span>
 
-                <h2>{result.final_prediction.predicted_class}</h2>
+                  <h2>{result.final_prediction.predicted_class}</h2>
 
-                <p>{result.final_prediction.reason}</p>
+                  <p>{result.final_prediction.reason}</p>
 
-                <div className="ai-final-details">
-                  <span>
-                    Confidence:{" "}
-                    <strong>
-                      {formatConfidence(
-                        result.final_prediction.confidence
-                      )}
-                    </strong>
-                  </span>
+                  <div className="ai-final-details">
+                    <span>
+                      Confidence:{" "}
+                      <strong>
+                        {formatConfidence(result.final_prediction.confidence)}
+                      </strong>
+                    </span>
 
-                  <span>
-                    Selected model:{" "}
-                    <strong>
-                      {result.final_prediction.selected_model}
-                    </strong>
-                  </span>
+                    <span>
+                      Selected model:{" "}
+                      <strong>{result.final_prediction.selected_model}</strong>
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <span className="ai-final-badge">CONFIRMED</span>
-            </GlassCard>
+                <span className="ai-final-badge">CONFIRMED</span>
+              </GlassCard>
+            )}
           </section>
         )}
       </section>

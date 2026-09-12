@@ -111,6 +111,73 @@ export type ComparisonApiResult = {
   };
 };
 
+type PredictionApiResponse = {
+  success: boolean;
+  model: "model1" | "model2";
+  result: {
+    prediction?: {
+      predicted_class_name?: string;
+      class_name?: string;
+      predicted_class?: string;
+      confidence?: number;
+      probabilities?: Record<string, number>;
+    };
+    final_class?: string;
+    class_name?: string;
+    confidence?: number;
+    probabilities?: Record<string, number>;
+  };
+};
+
+function normalizePrediction(
+  response: PredictionApiResponse
+): ComparisonApiResult["model1"] {
+  const prediction = response.result.prediction;
+
+  return {
+    predicted_class:
+      prediction?.predicted_class_name ??
+      prediction?.class_name ??
+      prediction?.predicted_class ??
+      response.result.final_class ??
+      response.result.class_name ??
+      "Unknown",
+    confidence: prediction?.confidence ?? response.result.confidence ?? 0,
+    probabilities:
+      prediction?.probabilities ?? response.result.probabilities ?? {},
+  };
+}
+
+async function predictModel(
+  model: "model1" | "model2",
+  latitude: number,
+  longitude: number
+) {
+  const response = await fetch(`${API_BASE_URL}/api/predict/${model}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ latitude, longitude }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Model ${model} prediction failed.`);
+  }
+
+  return normalizePrediction(
+    (await response.json()) as PredictionApiResponse
+  );
+}
+
+export function predictModel1(latitude: number, longitude: number) {
+  return predictModel("model1", latitude, longitude);
+}
+
+export function predictModel2(latitude: number, longitude: number) {
+  return predictModel("model2", latitude, longitude);
+}
+
 export async function comparePredictions(
   latitude: number,
   longitude: number
