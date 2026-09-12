@@ -1,0 +1,2 @@
+import type {ModelInfo} from "../../types/model";
+export const demoModelInfo:ModelInfo={name:"Snorkel-Assisted Random Forest",labelingFunctions:17,classes:5,events:302070,config:{n_estimators:700,class_weight:"balanced",max_features:"sqrt",min_samples_leaf:2,random_state:42,n_jobs:-1,imputation:"Median",training:"Sample-weighted"},metrics:null};

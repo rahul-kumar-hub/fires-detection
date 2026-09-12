@@ -1,0 +1,1 @@
+import {Outlet} from "react-router-dom"; import Navbar from "../components/common/Navbar"; export default function MainLayout(){return <><Navbar/><Outlet/><footer><span>FIRMS Fire Intelligence</span><small>From satellite fire detections to source intelligence.</small></footer></>}

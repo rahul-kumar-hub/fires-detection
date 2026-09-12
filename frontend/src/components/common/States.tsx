@@ -1,0 +1,3 @@
+export function LoadingState({label="Loading intelligence…"}:{label?:string}){return <div className="state"><div className="spinner"/><span>{label}</span></div>}
+export function EmptyState({title="Nothing to show",text="Try changing your filters."}:{title?:string;text?:string}){return <div className="state"><strong>{title}</strong><span>{text}</span></div>}
+export function ErrorState({onRetry}:{onRetry?:()=>void}){return <div className="state"><strong>Unable to load fire intelligence.</strong>{onRetry&&<button className="btn ghost" onClick={onRetry}>Retry</button>}</div>}

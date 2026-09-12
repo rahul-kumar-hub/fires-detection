@@ -1,0 +1,2 @@
+import type {DashboardStats} from "../../types/api";
+export const demoDashboardStats:DashboardStats={totalEvents:302070,highConfidence:184230,wildfire:109820,agriculture:72140,industrial:49380,mining:36110,gas:34620};

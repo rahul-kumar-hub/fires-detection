@@ -1,0 +1,2 @@
+import {useEffect,useState} from "react"; import {getDashboardStats} from "../services/api"; import type {DashboardStats} from "../types/api";
+export function useDashboard(){const [data,setData]=useState<DashboardStats|null>(null);useEffect(()=>{getDashboardStats().then(setData)},[]);return {data};}

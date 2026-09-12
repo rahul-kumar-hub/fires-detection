@@ -1,0 +1,1 @@
+import {ReactNode} from "react"; import GlassCard from "./GlassCard"; export default function StatCard({label,value,icon}:{label:string;value:string|number;icon?:ReactNode}){return <GlassCard className="stat"><div className="stat-icon">{icon}</div><span>{label}</span><strong>{value}</strong><small>Demo value</small></GlassCard>}

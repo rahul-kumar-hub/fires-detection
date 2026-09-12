@@ -1,0 +1,2 @@
+import {useEffect,useState} from "react"; import {getAnalytics} from "../services/analyticsService"; import type {AnalyticsData} from "../types/api";
+export function useAnalytics(){const [data,setData]=useState<AnalyticsData|null>(null);useEffect(()=>{getAnalytics().then(setData)},[]);return {data};}

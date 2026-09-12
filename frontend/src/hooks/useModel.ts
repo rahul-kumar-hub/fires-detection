@@ -1,0 +1,2 @@
+import {useEffect,useState} from "react"; import {getModelInfo} from "../services/modelService"; import type {ModelInfo} from "../types/model";
+export function useModel(){const [data,setData]=useState<ModelInfo|null>(null);useEffect(()=>{getModelInfo().then(setData)},[]);return {data};}

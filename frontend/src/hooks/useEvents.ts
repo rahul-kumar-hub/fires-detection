@@ -1,0 +1,2 @@
+import {useEffect,useState} from "react"; import {getEvents} from "../services/eventService"; import type {FireEvent} from "../types/fire";
+export function useEvents(){const [data,setData]=useState<FireEvent[]>([]);const [loading,setLoading]=useState(true);useEffect(()=>{getEvents().then(setData).finally(()=>setLoading(false));},[]);return {data,loading};}

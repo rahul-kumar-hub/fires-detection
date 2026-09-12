@@ -1,0 +1,1 @@
+import {getModelInfo} from "./api"; export {getModelInfo};
