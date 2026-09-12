@@ -181,7 +181,7 @@ export default function AIPrediction() {
             <div>
               <span className="ai-card-kicker">PREDICTION ENGINE</span>
 
-              <h2>Run a location analysis</h2>
+              <h2 className="ai-prediction-h2-engine">Run a location analysis</h2>
 
               <p>
                 Enter a geographic point to compare Model 1 and Model 2
