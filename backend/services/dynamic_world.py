@@ -18,7 +18,8 @@ import pandas as pd
 EE_PROJECT = (
     os.getenv("EE_PROJECT")
     or os.getenv("GOOGLE_CLOUD_PROJECT")
-)
+    or ""
+).strip()
 
 DW_COLLECTION = "GOOGLE/DYNAMICWORLD/V1"
 

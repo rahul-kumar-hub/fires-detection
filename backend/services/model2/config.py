@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 
@@ -123,7 +124,11 @@ OVERPASS_SERVERS = [
 # GOOGLE DYNAMIC WORLD
 # ============================================================
 
-EE_PROJECT = "planar-depth-508020-q9"
+EE_PROJECT = (
+    os.getenv("EE_PROJECT")
+    or os.getenv("GOOGLE_CLOUD_PROJECT")
+    or "planar-depth-508020-q9"
+).strip()
 
 DW_AREA_M = 300
 

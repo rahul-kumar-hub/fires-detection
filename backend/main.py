@@ -6,6 +6,7 @@ import os
 from getpass import getpass
 
 from backend.inference.model2 import run_model2
+from backend.services.model2 import config as model2_config
 from backend.services.firms import (
     build_firms_features,
     find_live_hotspot,
@@ -85,9 +86,34 @@ def main():
             latitude=latitude,
             longitude=longitude,
         )
-        print("\nModel 2 result:")
-        for key, value in result.items():
-            print(f"{key}: {value}")
+        print("\n" + "=" * 60)
+        print("FIRE SOURCE CLASSIFICATION")
+        print("=" * 60)
+        print(f"Predicted source : {result['class_name']}")
+        print(f"Confidence       : {result['confidence'] * 100:.2f}%")
+        print(f"Feature count    : {result['feature_count']}")
+        print("\nClass probabilities:")
+
+        sorted_probabilities = sorted(
+            result["probabilities"].items(),
+            key=lambda item: item[1],
+            reverse=True,
+        )
+
+        for class_id, probability in sorted_probabilities:
+            class_name = model2_config.MODEL2_CLASS_MAPPING.get(
+                int(class_id),
+                f"Class {class_id}",
+            )
+            print(f"  {class_name:22s} {probability * 100:8.2f}%")
+
+        print("=" * 60)
+        print("\nNOTE:")
+        print(
+            "This is a predicted source class "
+            "from the 2025-trained Random Forest."
+        )
+        print("It is NOT a NASA FIRMS source label.")
         return result
 
     print("\nQuery location")

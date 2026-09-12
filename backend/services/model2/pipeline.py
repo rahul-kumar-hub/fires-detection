@@ -37,10 +37,13 @@ def run_model2_pipeline(
     firms_map_key: str | None = None,
 ) -> dict:
 
+    print("\n[Model 2] Starting modular pipeline")
+
     map_key = (
         firms_map_key
         or os.getenv("NASA_FIRMS_MAP_KEY")
-    )
+        or ""
+    ).strip()
 
     if not map_key:
         raise RuntimeError(
@@ -51,6 +54,7 @@ def run_model2_pipeline(
     # 1. CURRENT FIRMS
     # ------------------------------------------------------------
 
+    print("[Model 2] 1/16 Searching current NASA FIRMS detections...")
     firms_df, bbox, current_requests = fetch_current_firms(
         map_key=map_key,
         latitude=latitude,
@@ -67,6 +71,7 @@ def run_model2_pipeline(
     # 2. EVENT CONSTRUCTION
     # ------------------------------------------------------------
 
+    print("[Model 2] 2/16 Building fire event context...")
     selected = firms_df.iloc[0]
 
     selected_datetime = selected["acq_datetime"]
@@ -86,6 +91,7 @@ def run_model2_pipeline(
     # 3. HISTORICAL FIRMS
     # ------------------------------------------------------------
 
+    print("[Model 2] 3/16 Fetching FIRMS historical detections...")
     historical_df, historical_requests, total_historical_requests = (
         fetch_historical_firms(
             map_key=map_key,
@@ -104,6 +110,7 @@ def run_model2_pipeline(
     # 4. TEMPORAL FEATURES
     # ------------------------------------------------------------
 
+    print("[Model 2] 4/16 Building temporal features...")
     temporal_features = build_temporal_features(
         historical_df=historical_df,
         selected=selected,
@@ -115,6 +122,7 @@ def run_model2_pipeline(
     # 5. EVENT FEATURES
     # ------------------------------------------------------------
 
+    print("[Model 2] 5/16 Building event features...")
     event_features = build_event_features(
         event_df
     )
@@ -123,6 +131,7 @@ def run_model2_pipeline(
     # 6. WORLD BANK FLARE
     # ------------------------------------------------------------
 
+    print("[Model 2] 6/16 Checking flare evidence...")
     flare_features = build_flare_features(
         selected=selected,
     )
@@ -131,6 +140,7 @@ def run_model2_pipeline(
     # 7. INDUSTRIAL
     # ------------------------------------------------------------
 
+    print("[Model 2] 7/16 Checking industrial evidence...")
     industrial_df = load_industrial_evidence()
 
     industrial_features = (
@@ -144,6 +154,7 @@ def run_model2_pipeline(
     # 8. MINING
     # ------------------------------------------------------------
 
+    print("[Model 2] 8/16 Checking mining evidence...")
     mining_df = load_mining_evidence()
 
     mining_features = build_mining_features(
@@ -155,12 +166,14 @@ def run_model2_pipeline(
     # 9. AGRICULTURE
     # ------------------------------------------------------------
 
+    print("[Model 2] 9/16 Checking agriculture evidence...")
     agriculture_df = load_agriculture_evidence()
 
     # ------------------------------------------------------------
     # 10. OSM
     # ------------------------------------------------------------
 
+    print("[Model 2] 10/16 Querying OpenStreetMap features...")
     osm_nearest, agri_osm_distance = (
         build_osm_features(
             latitude=latitude,
@@ -180,6 +193,7 @@ def run_model2_pipeline(
     # 11. WILDFIRE
     # ------------------------------------------------------------
 
+    print("[Model 2] 11/16 Checking wildfire evidence...")
     wildfire_df = load_wildfire_evidence()
 
     wildfire_features = build_wildfire_features(
@@ -191,6 +205,7 @@ def run_model2_pipeline(
     # 12. DYNAMIC WORLD
     # ------------------------------------------------------------
 
+    print("[Model 2] 12/16 Querying Google Dynamic World...")
     dw_df = build_dynamic_world_features(
         event_df=event_df,
         project=config.EE_PROJECT,
@@ -218,6 +233,7 @@ def run_model2_pipeline(
     # 13. COMBINE ALL FEATURES
     # ------------------------------------------------------------
 
+    print("[Model 2] 13/16 Combining model features...")
     features = combine_features(
         event_features=event_features,
         flare_features=flare_features,
@@ -237,6 +253,7 @@ def run_model2_pipeline(
     # 14. EXACT 137-FEATURE MATRIX
     # ------------------------------------------------------------
 
+    print("[Model 2] 14/16 Building and validating the 137-feature matrix...")
     model_features = config.MODEL_FEATURES
 
     X_test = build_model_matrix(
@@ -253,6 +270,7 @@ def run_model2_pipeline(
     # 15. IMPUTATION
     # ------------------------------------------------------------
 
+    print("[Model 2] 15/16 Applying the production imputer...")
     imputer = config.load_model2_imputer()
 
     X_imputed = apply_imputer(
@@ -264,6 +282,7 @@ def run_model2_pipeline(
     # 16. MODEL PREDICTION
     # ------------------------------------------------------------
 
+    print("[Model 2] 16/16 Running fire-source classification...")
     model = config.load_model2_model()
 
     probabilities = model.predict_proba(
@@ -309,6 +328,7 @@ def run_model2_pipeline(
     # 17. RESULT
     # ------------------------------------------------------------
 
+    print("[Model 2] Pipeline complete")
     return {
         "latitude": float(latitude),
         "longitude": float(longitude),
