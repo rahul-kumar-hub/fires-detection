@@ -68,7 +68,7 @@ def build_osm_query(
   nwr(around:{OSM_RADIUS_M},{latitude},{longitude})["landuse"="forest"];
 );
 
-out tags center qt;
+out body center;
 """
 
 
