@@ -28,3 +28,5 @@ env/
 backend/cache/
 data/cache/
 data/evidence/
+# Local SQLite database
+fire_detection.db
