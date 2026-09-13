@@ -30,3 +30,9 @@ data/cache/
 data/evidence/
 # Local SQLite database
 fire_detection.db
+# Frontend dependencies / build
+frontend/node_modules/
+frontend/dist/
+
+# TypeScript build cache
+*.tsbuildinfo

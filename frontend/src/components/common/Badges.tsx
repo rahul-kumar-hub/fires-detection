@@ -1,3 +1,4 @@
-import type {FireClass} from "../../types/fire"; import {FIRE_CLASSES,CONFIDENCE_BANDS} from "../../config/classes";
+import type {FireClass} from "../../types/fire"; 
+import {FIRE_CLASSES,CONFIDENCE_BANDS} from "../../config/classes";
 export function ClassBadge({value}:{value:FireClass}){return <span className={`badge class-${value.toLowerCase()}`}>{FIRE_CLASSES[value].label}</span>}
 export function ConfidenceBadge({value}:{value:number}){const band=value>=CONFIDENCE_BANDS.high?"HIGH":value>=CONFIDENCE_BANDS.medium?"MEDIUM":"LOW";return <span className={`badge conf-${band.toLowerCase()}`}>{band} CONFIDENCE</span>;}

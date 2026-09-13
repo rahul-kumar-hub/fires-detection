@@ -1,0 +1,760 @@
+/* =========================================================
+   FIRMS FOOTER
+   Light Theme - Modern Minimal Design
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Theme Variables
+   --------------------------------------------------------- */
+
+:root {
+  --footer-bg-main: #f4f1eb;
+  --footer-bg-secondary: #ebe6de;
+  --footer-bg-bottom: #e4ded5;
+
+  --footer-text-main: #171512;
+  --footer-text-muted: #77716a;
+  --footer-text-soft: #9a9188;
+
+  --footer-accent: #ff5a36;
+  --footer-accent-dark: #d94829;
+  --footer-brown: #a56f58;
+
+  --footer-border: rgba(23, 21, 18, 0.14);
+  --footer-border-strong: rgba(23, 21, 18, 0.22);
+
+  --footer-content-width: 1180px;
+}
+
+
+/* ---------------------------------------------------------
+   Root Footer
+   --------------------------------------------------------- */
+
+.firms-footer {
+  display: block !important;
+  position: relative;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  clear: both !important;
+  float: none !important;
+
+  flex: none !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+
+  overflow: hidden;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--footer-bg-main);
+  color: var(--footer-text-main);
+
+  isolation: isolate;
+}
+
+
+/* Prevent parent flex layouts from affecting footer children */
+
+.firms-footer *,
+.firms-footer *::before,
+.firms-footer *::after {
+  box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   Tier 1 - Back To Top
+   --------------------------------------------------------- */
+
+.footer-back-to-top {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100% !important;
+  min-height: 54px;
+
+  margin: 0 !important;
+  padding: 15px 24px;
+
+  border: 0;
+  border-top: 1px solid var(--footer-border);
+  border-bottom: 1px solid var(--footer-border);
+
+  background: var(--footer-bg-secondary);
+  color: var(--footer-text-main);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  cursor: pointer;
+
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease;
+}
+
+.footer-back-to-top:hover {
+  background: var(--footer-accent);
+  border-color: var(--footer-accent);
+  color: #ffffff;
+}
+
+.footer-back-to-top:focus-visible {
+  outline: 2px solid var(--footer-accent);
+  outline-offset: -4px;
+}
+
+.footer-back-to-top svg {
+  flex: 0 0 auto;
+  transition: transform 220ms ease;
+}
+
+.footer-back-to-top:hover svg {
+  transform: translateY(-3px);
+}
+
+
+/* ---------------------------------------------------------
+   Tier 2 - Main Footer Columns
+   --------------------------------------------------------- */
+
+.footer-main {
+  display: block !important;
+
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--footer-bg-main);
+}
+
+.footer-main-inner {
+  display: grid !important;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: start;
+
+  width: 100% !important;
+  max-width: var(--footer-content-width) !important;
+
+  margin: 0 auto !important;
+  padding: 76px 32px 72px !important;
+
+  column-gap: 56px;
+  row-gap: 40px;
+}
+
+
+/* Individual Column */
+
+.footer-column {
+  display: block !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-main);
+}
+
+
+/* Column Heading */
+
+.footer-column h3 {
+  display: block !important;
+
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-main);
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+
+/* Links List */
+
+.footer-column ul {
+  display: block !important;
+
+  list-style: none !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* List Items */
+
+.footer-column li {
+  display: block !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  list-style: none !important;
+}
+
+
+/* Footer Links */
+
+.footer-column a {
+  display: block !important;
+
+  width: fit-content;
+  max-width: 100%;
+
+  margin: 0 !important;
+  padding: 6px 0 !important;
+
+  color: var(--footer-text-muted);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-column a:hover {
+  color: var(--footer-accent);
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+.footer-column a:focus-visible {
+  outline: 2px solid var(--footer-accent);
+  outline-offset: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   Tier 3 - Brand and Localization
+   --------------------------------------------------------- */
+
+.footer-localization {
+  display: block !important;
+
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--footer-bg-secondary);
+  border-top: 1px solid var(--footer-border);
+}
+
+
+.footer-localization-inner {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100% !important;
+  max-width: var(--footer-content-width) !important;
+
+  min-height: 116px;
+
+  margin: 0 auto !important;
+  padding: 28px 32px !important;
+
+  gap: 28px;
+}
+
+
+/* FIRMS Brand */
+
+.footer-brand {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  width: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-main);
+  text-decoration: none;
+
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.footer-brand:hover {
+  color: var(--footer-accent);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+
+/* Brand Icon */
+
+.footer-brand-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 12px;
+
+  background: var(--footer-accent);
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 18px rgba(255, 90, 54, 0.16);
+
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.footer-brand:hover .footer-brand-icon {
+  background: var(--footer-accent-dark);
+  transform: rotate(-5deg);
+}
+
+
+/* Brand Text */
+
+.footer-brand > span:last-child {
+  display: inline-block;
+
+  color: var(--footer-text-muted);
+
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.footer-brand strong {
+  color: var(--footer-text-main);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+
+/* Localization Actions */
+
+.footer-localization-actions {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* Language and Country Buttons */
+
+.footer-locale-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 38px;
+
+  margin: 0 !important;
+  padding: 9px 14px !important;
+
+  border: 1px solid var(--footer-border-strong);
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--footer-text-main);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-locale-button:hover {
+  background: var(--footer-text-main);
+  border-color: var(--footer-text-main);
+  color: var(--footer-bg-main);
+  transform: translateY(-2px);
+}
+
+.footer-locale-button:focus-visible {
+  outline: 2px solid var(--footer-accent);
+  outline-offset: 3px;
+}
+
+.footer-locale-button svg {
+  flex: 0 0 auto;
+}
+
+
+/* ---------------------------------------------------------
+   Tier 4 - Bottom Services and Legal
+   --------------------------------------------------------- */
+
+.footer-bottom {
+  display: block !important;
+
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--footer-bg-bottom);
+  border-top: 1px solid var(--footer-border);
+}
+
+
+.footer-bottom-inner {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: var(--footer-content-width) !important;
+
+  margin: 0 auto !important;
+  padding: 34px 32px 30px !important;
+}
+
+
+/* ---------------------------------------------------------
+   Technical Services Grid
+   --------------------------------------------------------- */
+
+/*
+   Your technicalServices JSX is currently commented out.
+   These styles are ready if you enable it later.
+*/
+
+.footer-services-grid {
+  display: grid !important;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: start;
+
+  width: 100% !important;
+
+  margin: 0 0 34px !important;
+  padding: 0 0 30px !important;
+
+  column-gap: 40px;
+
+  border-bottom: 1px solid var(--footer-border);
+}
+
+.footer-service {
+  display: block !important;
+
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.footer-service h4 {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-main);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.footer-service p {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-muted);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   Legal Section
+   --------------------------------------------------------- */
+
+.footer-legal {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  gap: 20px;
+}
+
+.footer-legal p {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-soft);
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.footer-legal-links {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.footer-legal-links a {
+  display: inline-block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--footer-text-muted);
+
+  font-size: 11px;
+  line-height: 1.6;
+  text-decoration: none;
+
+  transition: color 180ms ease;
+}
+
+.footer-legal-links a:hover {
+  color: var(--footer-accent);
+  text-decoration: underline;
+}
+
+.footer-legal-links a:focus-visible {
+  outline: 2px solid var(--footer-accent);
+  outline-offset: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   Responsive Layout
+   --------------------------------------------------------- */
+
+/* Medium Screens */
+
+@media (max-width: 1000px) {
+  .footer-main-inner {
+    column-gap: 30px;
+    padding: 64px 28px 60px !important;
+  }
+
+  .footer-column h3 {
+    font-size: 15px;
+  }
+
+  .footer-column a {
+    font-size: 12px;
+  }
+
+  .footer-bottom-inner {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+
+  .footer-services-grid {
+    column-gap: 24px;
+  }
+}
+
+
+/* Tablet */
+
+@media (max-width: 760px) {
+  .footer-main-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    column-gap: 42px;
+    row-gap: 44px;
+
+    padding: 52px 28px !important;
+  }
+
+  .footer-localization-inner {
+    min-height: auto;
+    padding: 30px 24px !important;
+  }
+
+  .footer-bottom-inner {
+    padding: 30px 28px !important;
+  }
+
+  .footer-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    row-gap: 28px;
+  }
+
+  .footer-legal {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .footer-legal-links {
+    justify-content: flex-start;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 520px) {
+  .footer-back-to-top {
+    min-height: 50px;
+    padding: 14px 18px;
+  }
+
+  .footer-main-inner {
+    grid-template-columns: minmax(0, 1fr) !important;
+
+    row-gap: 34px;
+
+    padding: 44px 24px !important;
+  }
+
+  .footer-column h3 {
+    margin-bottom: 14px !important;
+    font-size: 16px;
+  }
+
+  .footer-column a {
+    padding: 5px 0 !important;
+    font-size: 13px;
+  }
+
+  .footer-localization-inner {
+    flex-direction: column;
+    gap: 22px;
+
+    padding: 28px 20px !important;
+  }
+
+  .footer-brand {
+    width: 100% !important;
+  }
+
+  .footer-localization-actions {
+    width: 100% !important;
+  }
+
+  .footer-locale-button {
+    flex: 1 1 auto;
+  }
+
+  .footer-bottom-inner {
+    padding: 28px 24px !important;
+  }
+
+  .footer-services-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .footer-legal {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-legal p {
+    width: 100%;
+  }
+
+  .footer-legal-links {
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+  }
+}
+
+
+/* Small Mobile */
+
+@media (max-width: 360px) {
+  .footer-main-inner {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .footer-localization-inner {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .footer-brand > span:last-child {
+    font-size: 13px;
+  }
+
+  .footer-locale-button {
+    padding: 9px 11px !important;
+    font-size: 11px;
+  }
+
+  .footer-bottom-inner {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Reduced Motion Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .firms-footer *,
+  .firms-footer *::before,
+  .firms-footer *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -20,6 +20,7 @@ import PredictionCard from "../components/dashboard/PredictionCard";
 import { useDashboard } from "../hooks/useDashboard";
 import { demoEvents } from "../data/demo/events";
 import { checkBackendHealth } from "../services/api";
+import Footer from "../components/common/Footer";
 
 export default function Dashboard() {
   const { data } = useDashboard();
@@ -169,6 +170,9 @@ export default function Dashboard() {
           {backendStatus === "offline" && "FASTAPI OFFLINE"}
         </span>
       </div>
+      
     </Page>
+    
   );
 }
+
