@@ -11,9 +11,7 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
-    raise RuntimeError(
-        "DATABASE_URL is not set in the environment."
-    )
+    raise RuntimeError("DATABASE_URL is not set in .env")
 
 
 class Base(DeclarativeBase):
@@ -28,7 +26,7 @@ engine = create_engine(
 SessionLocal = sessionmaker(
     bind=engine,
     autoflush=False,
-    autocommit=False,
+    expire_on_commit=False,
 )
 
 
@@ -42,7 +40,7 @@ def get_db():
 
 
 # Import models before creating tables
-from backend.database.models import User
+from backend.database.models import User, Department  # noqa: E402
 
 
 Base.metadata.create_all(bind=engine)

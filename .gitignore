@@ -30,3 +30,4 @@ data/cache/
 data/evidence/
 # Local SQLite database
 fire_detection.db
+frontend/node_modules/

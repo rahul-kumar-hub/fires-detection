@@ -10,7 +10,8 @@ from backend.auth import (
     get_current_user_id,
 )
 from backend.database.connection import get_db
-from backend.database.models import User
+from backend.database.models import User, Department
+
 from backend.schemas.auth import (
     RegisterRequest,
     LoginRequest,
@@ -24,6 +25,7 @@ router = APIRouter(
 )
 
 
+
 @router.post(
     "/register",
     response_model=TokenResponse,
@@ -33,6 +35,14 @@ def register(
     payload: RegisterRequest,
     db: Session = Depends(get_db),
 ):
+    # Validate account type
+    if payload.account_type not in {"individual", "department"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid account type",
+        )
+
+    # Check whether email already exists
     existing_user = db.scalar(
         select(User).where(User.email == payload.email)
     )
@@ -43,16 +53,34 @@ def register(
             detail="Email already registered",
         )
 
+    department_id = None
+
+    # Department account
+    if payload.account_type == "department":
+        department = Department(
+            name=payload.name,
+            code=payload.department_code,
+        )
+
+        db.add(department)
+        db.flush()
+
+        department_id = department.id
+
+    # Create user
     user = User(
         name=payload.name,
         email=payload.email,
         password_hash=hash_password(payload.password),
+        account_type=payload.account_type,
+        department_id=department_id,
     )
 
     db.add(user)
     db.commit()
     db.refresh(user)
 
+    # Generate JWT
     access_token = create_access_token(
         {"sub": str(user.id)}
     )
